@@ -1,0 +1,15 @@
+﻿# Backend (Java / Spring Boot)
+**/target/
+!.mvn/wrapper/maven-wrapper.jar
+**/.idea/
+**/*.iml
+
+# Frontend (sau này dùng)
+**/node_modules/
+**/dist/
+**/.angular/
+
+# Chung
+.vscode/
+.DS_Store
+*.log
