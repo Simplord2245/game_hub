@@ -1,0 +1,1071 @@
+﻿{
+    "info":  {
+                 "name":  "GameHub Backend - Phase 1",
+                 "description":  "API doc danh muc game va san pham cho giai doan khoi tao backend.",
+                 "schema":  "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+             },
+    "item":  [
+                 {
+                     "name":  "Dang ky tai khoan",
+                     "request":  {
+                                     "url":  {
+                                                 "host":  [
+                                                              "{{base_url}}"
+                                                          ],
+                                                 "raw":  "{{base_url}}/api/auth/register",
+                                                 "path":  [
+                                                              "api",
+                                                              "auth",
+                                                              "register"
+                                                          ]
+                                             },
+                                     "method":  "POST",
+                                     "body":  {
+                                                  "raw":  "{\"fullName\": \"Nguyen Van A\", \"email\": \"nguyenvana@example.com\", \"password\": \"matkhau123\", \"phone\": \"0912345678\"}",
+                                                  "options":  {
+                                                                  "raw":  {
+                                                                              "language":  "json"
+                                                                          }
+                                                              },
+                                                  "mode":  "raw"
+                                              },
+                                     "description":  "Dang ky tai khoan moi. Tra ve thong tin user.",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Content-Type",
+                                                        "value":  "application/json"
+                                                    }
+                                                ]
+                                 }
+                 },
+                 {
+                     "name":  "Dang nhap (nhan JWT)",
+                     "request":  {
+                                     "url":  {
+                                                 "host":  [
+                                                              "{{base_url}}"
+                                                          ],
+                                                 "raw":  "{{base_url}}/api/auth/login",
+                                                 "path":  [
+                                                              "api",
+                                                              "auth",
+                                                              "login"
+                                                          ]
+                                             },
+                                     "method":  "POST",
+                                     "body":  {
+                                                  "raw":  "{\"email\": \"nguyenvana@example.com\", \"password\": \"matkhau123\"}",
+                                                  "options":  {
+                                                                  "raw":  {
+                                                                              "language":  "json"
+                                                                          }
+                                                              },
+                                                  "mode":  "raw"
+                                              },
+                                     "description":  "Dang nhap bang email va mat khau. Tra ve JWT accessToken.",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Content-Type",
+                                                        "value":  "application/json"
+                                                    }
+                                                ]
+                                 },
+                     "event":  [
+                                   {
+                                       "listen":  "test",
+                                       "script":  {
+                                                      "type":  "text/javascript",
+                                                      "exec":  [
+                                                                   "if (pm.response.code === 200) {",
+                                                                   "    var res = pm.response.json();",
+                                                                   "    if (res.data \u0026\u0026 res.data.accessToken) {",
+                                                                   "        pm.collectionVariables.set(\u0027token\u0027, res.data.accessToken);",
+                                                                   "        console.log(\u0027JWT Token auto-saved!\u0027);",
+                                                                   "    }",
+                                                                   "}"
+                                                               ]
+                                                  }
+                                   }
+                               ]
+                 },
+                 {
+                     "name":  "Health check",
+                     "request":  {
+                                     "method":  "GET",
+                                     "url":  "http://localhost:8088/api/health"
+                                 }
+                 },
+                 {
+                     "name":  "Danh sach game",
+                     "request":  {
+                                     "method":  "GET",
+                                     "url":  "http://localhost:8088/api/games"
+                                 }
+                 },
+                 {
+                     "name":  "Tim game Genshin",
+                     "request":  {
+                                     "method":  "GET",
+                                     "url":  "http://localhost:8088/api/games?keyword=genshin"
+                                 }
+                 },
+                 {
+                     "name":  "Chi tiet game theo ID",
+                     "request":  {
+                                     "method":  "GET",
+                                     "url":  "http://localhost:8088/api/games/1"
+                                 }
+                 },
+                 {
+                     "name":  "Chi tiet game theo slug",
+                     "request":  {
+                                     "method":  "GET",
+                                     "url":  "http://localhost:8088/api/games/slug/genshin-impact"
+                                 }
+                 },
+                 {
+                     "name":  "Danh sach danh muc",
+                     "request":  {
+                                     "method":  "GET",
+                                     "url":  "http://localhost:8088/api/categories"
+                                 }
+                 },
+                 {
+                     "name":  "Danh sach san pham",
+                     "request":  {
+                                     "method":  "GET",
+                                     "url":  "http://localhost:8088/api/products"
+                                 }
+                 },
+                 {
+                     "name":  "Loc san pham theo game",
+                     "request":  {
+                                     "method":  "GET",
+                                     "url":  "http://localhost:8088/api/products?gameId=1"
+                                 }
+                 },
+                 {
+                     "name":  "Tim va sap xep san pham",
+                     "request":  {
+                                     "method":  "GET",
+                                     "url":  "http://localhost:8088/api/products?keyword=genshin\u0026sortBy=price-asc\u0026page=0\u0026size=12"
+                                 }
+                 },
+                 {
+                     "name":  "Chi tiet san pham theo ID",
+                     "request":  {
+                                     "method":  "GET",
+                                     "url":  "http://localhost:8088/api/products/1"
+                                 }
+                 },
+                 {
+                     "name":  "Chi tiet san pham theo slug",
+                     "request":  {
+                                     "method":  "GET",
+                                     "url":  "http://localhost:8088/api/products/slug/genshin-account-demo"
+                                 }
+                 },
+                 {
+                     "name":  "Thong tin ca nhan (Profile)",
+                     "request":  {
+                                     "method":  "GET",
+                                     "url":  {
+                                                 "host":  [
+                                                              "{{base_url}}"
+                                                          ],
+                                                 "raw":  "{{base_url}}/api/users/me",
+                                                 "path":  [
+                                                              "api",
+                                                              "users",
+                                                              "me"
+                                                          ]
+                                             },
+                                     "description":  "Xem ho so nguoi dung hien tai",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Authorization",
+                                                        "value":  "Bearer {{token}}"
+                                                    }
+                                                ]
+                                 }
+                 },
+                 {
+                     "name":  "Cap nhat ho so",
+                     "request":  {
+                                     "body":  {
+                                                  "raw":  "{\"fullName\":\"Nguyen Van B\",\"phone\":\"0987654321\",\"avatarUrl\":\"https://example.com/avatar.png\"}",
+                                                  "options":  {
+                                                                  "raw":  {
+                                                                              "language":  "json"
+                                                                          }
+                                                              },
+                                                  "mode":  "raw"
+                                              },
+                                     "method":  "PUT",
+                                     "url":  {
+                                                 "host":  [
+                                                              "{{base_url}}"
+                                                          ],
+                                                 "raw":  "{{base_url}}/api/users/me",
+                                                 "path":  [
+                                                              "api",
+                                                              "users",
+                                                              "me"
+                                                          ]
+                                             },
+                                     "description":  "Cap nhat ho so ca nhan",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Authorization",
+                                                        "value":  "Bearer {{token}}"
+                                                    },
+                                                    {
+                                                        "key":  "Content-Type",
+                                                        "value":  "application/json"
+                                                    }
+                                                ]
+                                 }
+                 },
+                 {
+                     "name":  "Doi mat khau",
+                     "request":  {
+                                     "body":  {
+                                                  "raw":  "{\"currentPassword\":\"matkhau123\",\"newPassword\":\"matkhaumoi123\",\"confirmPassword\":\"matkhaumoi123\"}",
+                                                  "options":  {
+                                                                  "raw":  {
+                                                                              "language":  "json"
+                                                                          }
+                                                              },
+                                                  "mode":  "raw"
+                                              },
+                                     "method":  "PATCH",
+                                     "url":  {
+                                                 "host":  [
+                                                              "{{base_url}}"
+                                                          ],
+                                                 "raw":  "{{base_url}}/api/users/me/password",
+                                                 "path":  [
+                                                              "api",
+                                                              "users",
+                                                              "me",
+                                                              "password"
+                                                          ]
+                                             },
+                                     "description":  "Doi mat khau tai khoan",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Authorization",
+                                                        "value":  "Bearer {{token}}"
+                                                    },
+                                                    {
+                                                        "key":  "Content-Type",
+                                                        "value":  "application/json"
+                                                    }
+                                                ]
+                                 }
+                 },
+                 {
+                     "name":  "Xem gio hang",
+                     "request":  {
+                                     "method":  "GET",
+                                     "url":  {
+                                                 "host":  [
+                                                              "{{base_url}}"
+                                                          ],
+                                                 "raw":  "{{base_url}}/api/cart",
+                                                 "path":  [
+                                                              "api",
+                                                              "cart"
+                                                          ]
+                                             },
+                                     "description":  "Xem gio hang cua toi",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Authorization",
+                                                        "value":  "Bearer {{token}}"
+                                                    }
+                                                ]
+                                 }
+                 },
+                 {
+                     "name":  "Them vao gio hang",
+                     "request":  {
+                                     "body":  {
+                                                  "raw":  "{\"productId\":1,\"quantity\":1}",
+                                                  "options":  {
+                                                                  "raw":  {
+                                                                              "language":  "json"
+                                                                          }
+                                                              },
+                                                  "mode":  "raw"
+                                              },
+                                     "method":  "POST",
+                                     "url":  {
+                                                 "host":  [
+                                                              "{{base_url}}"
+                                                          ],
+                                                 "raw":  "{{base_url}}/api/cart/items",
+                                                 "path":  [
+                                                              "api",
+                                                              "cart",
+                                                              "items"
+                                                          ]
+                                             },
+                                     "description":  "Them san pham vao gio hang",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Authorization",
+                                                        "value":  "Bearer {{token}}"
+                                                    },
+                                                    {
+                                                        "key":  "Content-Type",
+                                                        "value":  "application/json"
+                                                    }
+                                                ]
+                                 }
+                 },
+                 {
+                     "name":  "Cap nhat gio hang",
+                     "request":  {
+                                     "body":  {
+                                                  "raw":  "{\"quantity\":2}",
+                                                  "options":  {
+                                                                  "raw":  {
+                                                                              "language":  "json"
+                                                                          }
+                                                              },
+                                                  "mode":  "raw"
+                                              },
+                                     "method":  "PUT",
+                                     "url":  {
+                                                 "host":  [
+                                                              "{{base_url}}"
+                                                          ],
+                                                 "raw":  "{{base_url}}/api/cart/items/1",
+                                                 "path":  [
+                                                              "api",
+                                                              "cart",
+                                                              "items",
+                                                              "1"
+                                                          ]
+                                             },
+                                     "description":  "Cap nhat so luong cart item",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Authorization",
+                                                        "value":  "Bearer {{token}}"
+                                                    },
+                                                    {
+                                                        "key":  "Content-Type",
+                                                        "value":  "application/json"
+                                                    }
+                                                ]
+                                 }
+                 },
+                 {
+                     "name":  "Xoa san pham khoi gio",
+                     "request":  {
+                                     "method":  "DELETE",
+                                     "url":  {
+                                                 "host":  [
+                                                              "{{base_url}}"
+                                                          ],
+                                                 "raw":  "{{base_url}}/api/cart/items/1",
+                                                 "path":  [
+                                                              "api",
+                                                              "cart",
+                                                              "items",
+                                                              "1"
+                                                          ]
+                                             },
+                                     "description":  "Xoa dong san pham khoi gio",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Authorization",
+                                                        "value":  "Bearer {{token}}"
+                                                    }
+                                                ]
+                                 }
+                 },
+                 {
+                     "name":  "Lam trong gio hang",
+                     "request":  {
+                                     "method":  "DELETE",
+                                     "url":  {
+                                                 "host":  [
+                                                              "{{base_url}}"
+                                                          ],
+                                                 "raw":  "{{base_url}}/api/cart",
+                                                 "path":  [
+                                                              "api",
+                                                              "cart"
+                                                          ]
+                                             },
+                                     "description":  "Xoa tat ca san pham trong gio",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Authorization",
+                                                        "value":  "Bearer {{token}}"
+                                                    }
+                                                ]
+                                 }
+                 },
+                 {
+                     "name":  "Danh sach yeu thich",
+                     "request":  {
+                                     "method":  "GET",
+                                     "url":  {
+                                                 "host":  [
+                                                              "{{base_url}}"
+                                                          ],
+                                                 "raw":  "{{base_url}}/api/favorites",
+                                                 "path":  [
+                                                              "api",
+                                                              "favorites"
+                                                          ]
+                                             },
+                                     "description":  "Xem danh sach san pham yeu thich",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Authorization",
+                                                        "value":  "Bearer {{token}}"
+                                                    }
+                                                ]
+                                 }
+                 },
+                 {
+                     "name":  "Them yeu thich",
+                     "request":  {
+                                     "method":  "POST",
+                                     "url":  {
+                                                 "host":  [
+                                                              "{{base_url}}"
+                                                          ],
+                                                 "raw":  "{{base_url}}/api/favorites/1",
+                                                 "path":  [
+                                                              "api",
+                                                              "favorites",
+                                                              "1"
+                                                          ]
+                                             },
+                                     "description":  "Them san pham ID 1 vao yeu thich",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Authorization",
+                                                        "value":  "Bearer {{token}}"
+                                                    }
+                                                ]
+                                 }
+                 },
+                 {
+                     "name":  "Kiem tra yeu thich",
+                     "request":  {
+                                     "method":  "GET",
+                                     "url":  {
+                                                 "host":  [
+                                                              "{{base_url}}"
+                                                          ],
+                                                 "raw":  "{{base_url}}/api/favorites/1/check",
+                                                 "path":  [
+                                                              "api",
+                                                              "favorites",
+                                                              "1",
+                                                              "check"
+                                                          ]
+                                             },
+                                     "description":  "Kiem tra trang thai yeu thich",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Authorization",
+                                                        "value":  "Bearer {{token}}"
+                                                    }
+                                                ]
+                                 }
+                 },
+                 {
+                     "name":  "Bo yeu thich",
+                     "request":  {
+                                     "method":  "DELETE",
+                                     "url":  {
+                                                 "host":  [
+                                                              "{{base_url}}"
+                                                          ],
+                                                 "raw":  "{{base_url}}/api/favorites/1",
+                                                 "path":  [
+                                                              "api",
+                                                              "favorites",
+                                                              "1"
+                                                          ]
+                                             },
+                                     "description":  "Xoa san pham ID 1 khoi yeu thich",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Authorization",
+                                                        "value":  "Bearer {{token}}"
+                                                    }
+                                                ]
+                                 }
+                 },
+                 {
+                     "name":  "Kiem tra ma giam gia",
+                     "request":  {
+                                     "body":  {
+                                                  "raw":  "{\"couponCode\":\"GAMEHUB10\",\"orderTotal\":500000}",
+                                                  "options":  {
+                                                                  "raw":  {
+                                                                              "language":  "json"
+                                                                          }
+                                                              },
+                                                  "mode":  "raw"
+                                              },
+                                     "method":  "POST",
+                                     "url":  {
+                                                 "host":  [
+                                                              "{{base_url}}"
+                                                          ],
+                                                 "raw":  "{{base_url}}/api/coupons/validate",
+                                                 "path":  [
+                                                              "api",
+                                                              "coupons",
+                                                              "validate"
+                                                          ]
+                                             },
+                                     "description":  "Kiem tra va tinh toan giam gia coupon",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Authorization",
+                                                        "value":  "Bearer {{token}}"
+                                                    },
+                                                    {
+                                                        "key":  "Content-Type",
+                                                        "value":  "application/json"
+                                                    }
+                                                ]
+                                 }
+                 },
+                 {
+                     "name":  "Dat hang tu gio hang",
+                     "request":  {
+                                     "body":  {
+                                                  "raw":  "{\"couponCode\":\"GAMEHUB10\",\"customerNote\":\"Giao nhanh giup minh\"}",
+                                                  "options":  {
+                                                                  "raw":  {
+                                                                              "language":  "json"
+                                                                          }
+                                                              },
+                                                  "mode":  "raw"
+                                              },
+                                     "method":  "POST",
+                                     "url":  {
+                                                 "host":  [
+                                                              "{{base_url}}"
+                                                          ],
+                                                 "raw":  "{{base_url}}/api/orders",
+                                                 "path":  [
+                                                              "api",
+                                                              "orders"
+                                                          ]
+                                             },
+                                     "description":  "Tao don hang tu gio hang hien tai",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Authorization",
+                                                        "value":  "Bearer {{token}}"
+                                                    },
+                                                    {
+                                                        "key":  "Content-Type",
+                                                        "value":  "application/json"
+                                                    }
+                                                ]
+                                 }
+                 },
+                 {
+                     "name":  "Danh sach don hang cua toi",
+                     "request":  {
+                                     "method":  "GET",
+                                     "url":  {
+                                                 "host":  [
+                                                              "{{base_url}}"
+                                                          ],
+                                                 "raw":  "{{base_url}}/api/orders",
+                                                 "path":  [
+                                                              "api",
+                                                              "orders"
+                                                          ]
+                                             },
+                                     "description":  "Xem lich su don hang cua toi",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Authorization",
+                                                        "value":  "Bearer {{token}}"
+                                                    }
+                                                ]
+                                 }
+                 },
+                 {
+                     "name":  "Chi tiet don hang theo ma",
+                     "request":  {
+                                     "method":  "GET",
+                                     "url":  {
+                                                 "host":  [
+                                                              "{{base_url}}"
+                                                          ],
+                                                 "raw":  "{{base_url}}/api/orders/GH-SAMPLE",
+                                                 "path":  [
+                                                              "api",
+                                                              "orders",
+                                                              "GH-SAMPLE"
+                                                          ]
+                                             },
+                                     "description":  "Xem chi tiet don hang",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Authorization",
+                                                        "value":  "Bearer {{token}}"
+                                                    }
+                                                ]
+                                 }
+                 },
+                 {
+                     "name":  "Huy don hang",
+                     "request":  {
+                                     "method":  "DELETE",
+                                     "url":  {
+                                                 "host":  [
+                                                              "{{base_url}}"
+                                                          ],
+                                                 "raw":  "{{base_url}}/api/orders/1/cancel",
+                                                 "path":  [
+                                                              "api",
+                                                              "orders",
+                                                              "1",
+                                                              "cancel"
+                                                          ]
+                                             },
+                                     "description":  "Huy don hang dang cho thanh toan",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Authorization",
+                                                        "value":  "Bearer {{token}}"
+                                                    }
+                                                ]
+                                 }
+                 },
+                 {
+                     "name":  "Xem danh gia san pham",
+                     "request":  {
+                                     "method":  "GET",
+                                     "url":  {
+                                                 "host":  [
+                                                              "{{base_url}}"
+                                                          ],
+                                                 "raw":  "{{base_url}}/api/products/1/reviews",
+                                                 "path":  [
+                                                              "api",
+                                                              "products",
+                                                              "1",
+                                                              "reviews"
+                                                          ]
+                                             },
+                                     "description":  "Xem danh gia cua san pham 1",
+                                     "header":  [
+
+                                                ]
+                                 }
+                 },
+                 {
+                     "name":  "Tao danh gia san pham",
+                     "request":  {
+                                     "body":  {
+                                                  "raw":  "{\"productId\":1,\"orderItemId\":1,\"rating\":5,\"comment\":\"San pham rat tot!\"}",
+                                                  "options":  {
+                                                                  "raw":  {
+                                                                              "language":  "json"
+                                                                          }
+                                                              },
+                                                  "mode":  "raw"
+                                              },
+                                     "method":  "POST",
+                                     "url":  {
+                                                 "host":  [
+                                                              "{{base_url}}"
+                                                          ],
+                                                 "raw":  "{{base_url}}/api/reviews",
+                                                 "path":  [
+                                                              "api",
+                                                              "reviews"
+                                                          ]
+                                             },
+                                     "description":  "Tao danh gia",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Authorization",
+                                                        "value":  "Bearer {{token}}"
+                                                    },
+                                                    {
+                                                        "key":  "Content-Type",
+                                                        "value":  "application/json"
+                                                    }
+                                                ]
+                                 }
+                 },
+                 {
+                     "name":  "Tao ticket ho tro",
+                     "request":  {
+                                     "body":  {
+                                                  "raw":  "{\"subject\":\"Can ho tro ma kich hoat\",\"message\":\"Ma kich hoat bao loi\",\"orderId\":null,\"priority\":\"NORMAL\"}",
+                                                  "options":  {
+                                                                  "raw":  {
+                                                                              "language":  "json"
+                                                                          }
+                                                              },
+                                                  "mode":  "raw"
+                                              },
+                                     "method":  "POST",
+                                     "url":  {
+                                                 "host":  [
+                                                              "{{base_url}}"
+                                                          ],
+                                                 "raw":  "{{base_url}}/api/tickets",
+                                                 "path":  [
+                                                              "api",
+                                                              "tickets"
+                                                          ]
+                                             },
+                                     "description":  "Gui ticket ho tro",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Authorization",
+                                                        "value":  "Bearer {{token}}"
+                                                    },
+                                                    {
+                                                        "key":  "Content-Type",
+                                                        "value":  "application/json"
+                                                    }
+                                                ]
+                                 }
+                 },
+                 {
+                     "name":  "Danh sach ticket cua toi",
+                     "request":  {
+                                     "method":  "GET",
+                                     "url":  {
+                                                 "host":  [
+                                                              "{{base_url}}"
+                                                          ],
+                                                 "raw":  "{{base_url}}/api/tickets",
+                                                 "path":  [
+                                                              "api",
+                                                              "tickets"
+                                                          ]
+                                             },
+                                     "description":  "Xem danh sach ticket cua toi",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Authorization",
+                                                        "value":  "Bearer {{token}}"
+                                                    }
+                                                ]
+                                 }
+                 },
+                 {
+                     "name":  "Chi tiet ticket",
+                     "request":  {
+                                     "method":  "GET",
+                                     "url":  {
+                                                 "host":  [
+                                                              "{{base_url}}"
+                                                          ],
+                                                 "raw":  "{{base_url}}/api/tickets/1",
+                                                 "path":  [
+                                                              "api",
+                                                              "tickets",
+                                                              "1"
+                                                          ]
+                                             },
+                                     "description":  "Xem chi tiet ticket",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Authorization",
+                                                        "value":  "Bearer {{token}}"
+                                                    }
+                                                ]
+                                 }
+                 },
+                 {
+                     "name":  "Khach phan hoi ticket",
+                     "request":  {
+                                     "body":  {
+                                                  "raw":  "{\"message\":\"Cam on admin da ho tro\"}",
+                                                  "options":  {
+                                                                  "raw":  {
+                                                                              "language":  "json"
+                                                                          }
+                                                              },
+                                                  "mode":  "raw"
+                                              },
+                                     "method":  "POST",
+                                     "url":  {
+                                                 "host":  [
+                                                              "{{base_url}}"
+                                                          ],
+                                                 "raw":  "{{base_url}}/api/tickets/1/reply",
+                                                 "path":  [
+                                                              "api",
+                                                              "tickets",
+                                                              "1",
+                                                              "reply"
+                                                          ]
+                                             },
+                                     "description":  "Phan hoi ticket",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Authorization",
+                                                        "value":  "Bearer {{token}}"
+                                                    },
+                                                    {
+                                                        "key":  "Content-Type",
+                                                        "value":  "application/json"
+                                                    }
+                                                ]
+                                 }
+                 },
+                 {
+                     "name":  "Admin: Danh sach san pham",
+                     "request":  {
+                                     "method":  "GET",
+                                     "url":  {
+                                                 "host":  [
+                                                              "{{base_url}}"
+                                                          ],
+                                                 "raw":  "{{base_url}}/api/admin/products",
+                                                 "path":  [
+                                                              "api",
+                                                              "admin",
+                                                              "products"
+                                                          ]
+                                             },
+                                     "description":  "Admin xem tat ca san pham",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Authorization",
+                                                        "value":  "Bearer {{token}}"
+                                                    }
+                                                ]
+                                 }
+                 },
+                 {
+                     "name":  "Admin: Them san pham moi",
+                     "request":  {
+                                     "body":  {
+                                                  "raw":  "{\"gameId\":1,\"categoryId\":1,\"sku\":\"VALO-AC-002\",\"productName\":\"Acc Valorant Radiant\",\"slug\":\"acc-valorant-radiant\",\"productType\":\"ACCOUNT\",\"platform\":\"PC\",\"region\":\"SEA\",\"serverName\":\"Asia\",\"price\":1500000,\"salePrice\":1200000,\"productStatus\":\"ACTIVE\"}",
+                                                  "options":  {
+                                                                  "raw":  {
+                                                                              "language":  "json"
+                                                                          }
+                                                              },
+                                                  "mode":  "raw"
+                                              },
+                                     "method":  "POST",
+                                     "url":  {
+                                                 "host":  [
+                                                              "{{base_url}}"
+                                                          ],
+                                                 "raw":  "{{base_url}}/api/admin/products",
+                                                 "path":  [
+                                                              "api",
+                                                              "admin",
+                                                              "products"
+                                                          ]
+                                             },
+                                     "description":  "Admin tao san pham",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Authorization",
+                                                        "value":  "Bearer {{token}}"
+                                                    },
+                                                    {
+                                                        "key":  "Content-Type",
+                                                        "value":  "application/json"
+                                                    }
+                                                ]
+                                 }
+                 },
+                 {
+                     "name":  "Admin: Nhap kho san pham so",
+                     "request":  {
+                                     "body":  {
+                                                  "raw":  "{\"productId\":1,\"inventoryCode\":\"KEY-VAL-001\",\"secretPayload\":\"user:pass123\",\"displayNote\":\"Acc full thong tin\"}",
+                                                  "options":  {
+                                                                  "raw":  {
+                                                                              "language":  "json"
+                                                                          }
+                                                              },
+                                                  "mode":  "raw"
+                                              },
+                                     "method":  "POST",
+                                     "url":  {
+                                                 "host":  [
+                                                              "{{base_url}}"
+                                                          ],
+                                                 "raw":  "{{base_url}}/api/admin/inventory",
+                                                 "path":  [
+                                                              "api",
+                                                              "admin",
+                                                              "inventory"
+                                                          ]
+                                             },
+                                     "description":  "Admin nhap kho",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Authorization",
+                                                        "value":  "Bearer {{token}}"
+                                                    },
+                                                    {
+                                                        "key":  "Content-Type",
+                                                        "value":  "application/json"
+                                                    }
+                                                ]
+                                 }
+                 },
+                 {
+                     "name":  "Admin: Danh sach don hang",
+                     "request":  {
+                                     "method":  "GET",
+                                     "url":  {
+                                                 "host":  [
+                                                              "{{base_url}}"
+                                                          ],
+                                                 "raw":  "{{base_url}}/api/admin/orders",
+                                                 "path":  [
+                                                              "api",
+                                                              "admin",
+                                                              "orders"
+                                                          ]
+                                             },
+                                     "description":  "Admin xem tat ca don hang",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Authorization",
+                                                        "value":  "Bearer {{token}}"
+                                                    }
+                                                ]
+                                 }
+                 },
+                 {
+                     "name":  "Admin: Cap nhat trang thai don hang",
+                     "request":  {
+                                     "body":  {
+                                                  "raw":  "{\"status\":\"COMPLETED\"}",
+                                                  "options":  {
+                                                                  "raw":  {
+                                                                              "language":  "json"
+                                                                          }
+                                                              },
+                                                  "mode":  "raw"
+                                              },
+                                     "method":  "PATCH",
+                                     "url":  {
+                                                 "host":  [
+                                                              "{{base_url}}"
+                                                          ],
+                                                 "raw":  "{{base_url}}/api/admin/orders/1/status",
+                                                 "path":  [
+                                                              "api",
+                                                              "admin",
+                                                              "orders",
+                                                              "1",
+                                                              "status"
+                                                          ]
+                                             },
+                                     "description":  "Admin hoan thanh don hang (ban giao secret)",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Authorization",
+                                                        "value":  "Bearer {{token}}"
+                                                    },
+                                                    {
+                                                        "key":  "Content-Type",
+                                                        "value":  "application/json"
+                                                    }
+                                                ]
+                                 }
+                 },
+                 {
+                     "name":  "Admin: Danh sach nguoi dung",
+                     "request":  {
+                                     "method":  "GET",
+                                     "url":  {
+                                                 "host":  [
+                                                              "{{base_url}}"
+                                                          ],
+                                                 "raw":  "{{base_url}}/api/admin/users",
+                                                 "path":  [
+                                                              "api",
+                                                              "admin",
+                                                              "users"
+                                                          ]
+                                             },
+                                     "description":  "Admin xem danh sach users",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Authorization",
+                                                        "value":  "Bearer {{token}}"
+                                                    }
+                                                ]
+                                 }
+                 },
+                 {
+                     "name":  "Admin: Khoa / Mo tai khoan",
+                     "request":  {
+                                     "body":  {
+                                                  "raw":  "{\"status\":\"LOCKED\"}",
+                                                  "options":  {
+                                                                  "raw":  {
+                                                                              "language":  "json"
+                                                                          }
+                                                              },
+                                                  "mode":  "raw"
+                                              },
+                                     "method":  "PATCH",
+                                     "url":  {
+                                                 "host":  [
+                                                              "{{base_url}}"
+                                                          ],
+                                                 "raw":  "{{base_url}}/api/admin/users/2/status",
+                                                 "path":  [
+                                                              "api",
+                                                              "admin",
+                                                              "users",
+                                                              "2",
+                                                              "status"
+                                                          ]
+                                             },
+                                     "description":  "Admin khoa hoac mo khoa tai khoan",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Authorization",
+                                                        "value":  "Bearer {{token}}"
+                                                    },
+                                                    {
+                                                        "key":  "Content-Type",
+                                                        "value":  "application/json"
+                                                    }
+                                                ]
+                                 }
+                 }
+             ],
+    "variable":  [
+                     {
+                         "key":  "base_url",
+                         "type":  "string",
+                         "value":  "http://localhost:8088"
+                     },
+                     {
+                         "key":  "token",
+                         "type":  "string",
+                         "value":  ""
+                     }
+                 ]
+}
+

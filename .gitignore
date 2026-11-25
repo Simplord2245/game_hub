@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
 
 # Compiled output
@@ -40,3 +41,20 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+=======
+﻿# Backend (Java / Spring Boot)
+**/target/
+!.mvn/wrapper/maven-wrapper.jar
+**/.idea/
+**/*.iml
+
+# Frontend (sau này dùng)
+**/node_modules/
+**/dist/
+**/.angular/
+
+# Chung
+.vscode/
+.DS_Store
+*.log
+>>>>>>> 2adf26298fea0ce1ab7e810c91e4f0cb6c444386
